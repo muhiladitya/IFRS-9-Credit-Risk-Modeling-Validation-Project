@@ -269,7 +269,7 @@ Important limitations:
 1. Clone the repository.
 2. Place the dataset files in the project folder.
 3. Install required Python libraries.
-4. Open `PD Model.ipynb`.
+4. Open `Credit_Risk_IFRS_9ipynb`.
 5. Run all cells from top to bottom.
 
 Required packages:
