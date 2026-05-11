@@ -200,7 +200,7 @@ The simulation uses:
 For each simulation:
 
 1. Generate one random number between 0 and 1 for each borrower.
-2. If the random number is less than the borrower PD, the borrower defaults.
+2. If the random number is less than the borrower's PD, the borrower defaults.
 3. If the borrower defaults, loss is calculated as `LGD × EAD`.
 4. Losses are summed across all borrowers to get one simulated portfolio loss.
 5. This process is repeated 10,000 times.
@@ -264,21 +264,6 @@ Important limitations:
 - No correlated default simulation.
 - Logistic regression ROC-AUC is modest, so the PD model is a baseline.
 
-## Possible Improvements
-
-Future improvements could include:
-
-- Add calibration curve and Brier score for PD calibration.
-- Add PD decile analysis.
-- Test tree-based models such as Random Forest, XGBoost, or LightGBM.
-- Calibrate predicted PDs before using them for ECL.
-- Use real outstanding balance for EAD.
-- Build an LGD model if recovery data is available.
-- Add macroeconomic scenario analysis.
-- Use a correlated default simulation using a Vasicek-style one-factor model.
-- Use 99.9% VaR for Basel-style capital comparison.
-- Add model monitoring metrics such as PSI and stability analysis.
-
 ## How to Run the Project
 
 1. Clone the repository.
@@ -314,12 +299,4 @@ pip install numpy pandas matplotlib seaborn scikit-learn imbalanced-learn
 └── README.md
 ```
 
-## Interview Summary
 
-This project can be explained as follows:
-
-> I built an interpretable baseline credit risk PD model using logistic regression. I handled missing values, engineered borrower and bureau risk features, managed class imbalance using class weighting and SMOTE, and selected the class-weighted model based on ROC-AUC. I then used the predicted PDs in a simplified IFRS 9 ECL framework, assigning loans into Stage 1, Stage 2, and Stage 3 and calculating ECL using PD, LGD, and EAD. Finally, I simulated portfolio losses using Monte Carlo methods and estimated VaR-based economic capital as the unexpected-loss buffer above expected loss.
-
-## Disclaimer
-
-This project is for educational and interview demonstration purposes only. It simplifies several real-world IFRS 9 and Basel requirements and should not be used as a regulatory credit risk model.
